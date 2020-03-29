@@ -10,14 +10,18 @@ import json
 import pandas as pd 
 
 
-conn = http.client.HTTPSConnection("covid-193.p.rapidapi.com")
+# conn = http.client.HTTPSConnection("covid-193.p.rapidapi.com")
+conn = http.client.HTTPSConnection('api.covid19india.org')
 
+"""
 headers = {
     'x-rapidapi-host': "covid-193.p.rapidapi.com",
     'x-rapidapi-key': "8cd8a8ba13mshf5068b192883d64p12cdb3jsn0bf8df5217b3"
     }
+"""
 
-conn.request("GET", "/statistics", headers=headers)
+#conn.request("GET", "/statistics", headers = headers)
+conn.request("GET", "/raw_data.json" )
 
 res = conn.getresponse()
 
@@ -28,13 +32,13 @@ json_output= json.dumps(json_data, indent=2, sort_keys=True)
 
 #print (json.dumps(json_data, indent=2, sort_keys=True))
 
-with open("Ponga_pandit.json", "w") as outfile: 
+with open("Ponga_pandit_experts.json", "w") as outfile: 
     outfile.write(json_output)
     
-pd.read_json('Ponga_pandit.json').to_csv('output.csv')
+#pd.read_json('Ponga_pandit.json').to_csv('output.csv')
 
 #print ("JSON created successfully")
 
 
-#print("API output obtained  for PONGA PONDIT")
+print("API output obtained  for PONGA PONDIT")
 
